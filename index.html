@@ -1574,30 +1574,32 @@
       // Function to display song content when title is clicked
       function displaySong(index) {
         const songItems = document.querySelectorAll(".songItem");
+        const filteredSongs = document.querySelectorAll(".filtered");
+
+        // Check if there's any filtering applied
+        const songsToSearch =
+          filteredSongs.length > 0 ? filteredSongs : songItems;
+
+        const selectedSong = songsToSearch[index];
+        const songList = document.getElementById("songList");
+        // Scroll to the selected song
+        selectedSong.scrollIntoView({ behavior: "smooth", block: "start" });
         songItems.forEach((item, i) => {
           const content = item.querySelector(".songContent");
+          const copyButton = item.querySelector(".copyButton");
+
           if (i === index) {
             if (content.style.display === "block") {
-              content.style.display = "none"; // Hide if already displayed
-              // Hide copy button
-              const copyButton = item.querySelector(".copyButton");
-              copyButton.style.display = "";
-              // Hide heart button
+              content.style.display = "none"; // Toggle display
+              copyButton.style.display = "none"; // Hide copy button
             } else {
-              content.style.display = "block"; // Display if not displayed
-              // Show copy button
-              const copyButton = item.querySelector(".copyButton");
-              copyButton.style.display = "inline-block";
-              // Show heart button if it was visible before
-              const heartButton = item.querySelector(".heartButton");
+              content.style.display = "block"; // Toggle display
+              copyButton.style.display = "inline-block"; // Show copy button
             }
           } else {
-            // Close the previously opened song
+            // Close other songs
             content.style.display = "none";
-            // Hide copy button
-            const copyButton = item.querySelector(".copyButton");
-            copyButton.style.display = "";
-            // Hide heart button
+            copyButton.style.display = "none";
           }
         });
       }
