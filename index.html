@@ -1601,6 +1601,23 @@
           }
         });
       }
+      // Function to scroll to the selected song
+      function scrollToSong(index) {
+        const songItems = document.querySelectorAll(".songItem");
+        const selectedSong = songItems[index];
+
+        // Scroll to the selected song with smooth behavior and center alignment
+        selectedSong.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      // Add event listener to each song title to scroll to the corresponding song
+      const songTitles = document.querySelectorAll(".songTitle");
+      songTitles.forEach((title, index) => {
+        title.addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent default link behavior
+          scrollToSong(index);
+        });
+      });
 
       // Function to search songs based on input
       function searchSongs() {
